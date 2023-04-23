@@ -1,3 +1,4 @@
+import 'package:expense_planner/expenses_list.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_planner/model/expense.dart';
 
@@ -29,9 +30,9 @@ class _ExpensesState extends State<Expenses> {
   Widget build(context) {
     return Scaffold(
       body: Column(
-        children: const [
-          Text('expense chart'),
-          Text('expense data'),
+        children: [
+          const Text('expense chart'),
+          Expanded(child: ExpenseList(expenses: registeredExpense)),
         ],
       ),
     );
