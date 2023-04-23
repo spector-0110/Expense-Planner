@@ -14,7 +14,7 @@ class Expense {
 
   final String id;
   final String title;
-  final String dateTime;
-  final String amount;
+  final DateTime dateTime;
+  final double amount;
   final Category category;
 }
