@@ -1,4 +1,3 @@
-
 import 'package:expense_planner/model/expense.dart';
 import 'package:flutter/material.dart';
 
@@ -7,7 +6,6 @@ class ExpenseItems extends StatelessWidget {
 
   final Expense expense;
   @override
-  
   Widget build(context) {
     return Card(
       child: Padding(
