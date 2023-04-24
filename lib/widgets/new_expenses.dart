@@ -30,7 +30,7 @@ class _NewExpenseState extends State<NewExpense> {
 
   void _submitExpense() {
     final enteredAmount = double.parse(_amountController.text);
-    final amountIsInvalid = enteredAmount == null || enteredAmount <= 0;
+    final amountIsInvalid = enteredAmount ==  null || enteredAmount <= 0;
     final titleIsInvalid = _titleController.text.trim().isEmpty;
     final dateIsInvalid = _selectedDate == null;
     if (titleIsInvalid || amountIsInvalid || dateIsInvalid) {
@@ -56,6 +56,7 @@ class _NewExpenseState extends State<NewExpense> {
         title: _titleController.text,
         dateTime: _selectedDate!,
         category: _selectedCategory));
+    Navigator.pop(context);
   }
 
   @override
@@ -68,7 +69,7 @@ class _NewExpenseState extends State<NewExpense> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(16),
+      padding: const EdgeInsets.fromLTRB(16, 55, 16, 16),
       child: Column(
         children: [
           TextField(
