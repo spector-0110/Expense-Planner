@@ -6,6 +6,8 @@ class ExpenseItems extends StatelessWidget {
   const ExpenseItems(this.expense, {super.key});
 
   final Expense expense;
+  @override
+  
   Widget build(context) {
     return Card(
       child: Padding(
