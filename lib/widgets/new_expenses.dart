@@ -35,6 +35,21 @@ class _NewExpenseState extends State<NewExpense> {
     final dateIsInvalid = _selectedDate == null;
     if (titleIsInvalid || amountIsInvalid || dateIsInvalid) {
       // condition for false input
+      showDialog(
+        context: context,
+        builder: (ctx) => AlertDialog(
+          title: const Text('Invalid Input'),
+          content: const Text('enter correct date and time and amount'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.pop(ctx);
+                },
+                child: const Text('okay'))
+          ],
+        ),
+      );
+      return;
     }
   }
 
