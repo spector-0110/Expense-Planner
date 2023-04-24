@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:expense_planner/model/expense.dart';
 
 class NewExpense extends StatefulWidget {
-  const NewExpense({super.key});
-
+  const NewExpense({super.key, required this.onAddExpense});
+  final Function(Expense) onAddExpense;
   @override
   State<NewExpense> createState() {
     return _NewExpenseState();
@@ -51,6 +51,11 @@ class _NewExpenseState extends State<NewExpense> {
       );
       return;
     }
+    widget.onAddExpense(Expense(
+        amount: enteredAmount,
+        title: _titleController.text,
+        dateTime: _selectedDate!,
+        category: _selectedCategory));
   }
 
   @override
