@@ -1,17 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:expense_planner/model/expense.dart';
 
 class NewExpense extends StatefulWidget {
   const NewExpense({super.key});
+
   @override
   State<NewExpense> createState() {
-    return _NewExpensesState();
+    return _NewExpenseState();
   }
 }
 
-class _NewExpensesState extends State<NewExpense> {
+class _NewExpenseState extends State<NewExpense> {
   final _titleController = TextEditingController();
   final _amountController = TextEditingController();
+  DateTime? _selectedDate;
 
+  void _presentDatePicker() async {
+    final now = DateTime.now();
+    final start = DateTime(now.year - 40, now.month, now.day);
+    final end = DateTime(now.year + 10, now.month, now.day);
+    var pickedDate = await showDatePicker(
+        context: context, initialDate: now, firstDate: start, lastDate: end);
+
+    setState(() {
+      _selectedDate = pickedDate;
+    });
+  }
+
+  @override
   void dispose() {
     _titleController.dispose();
     _amountController.dispose();
@@ -19,31 +35,64 @@ class _NewExpensesState extends State<NewExpense> {
   }
 
   @override
-  Widget build(context) {
+  Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(16),
       child: Column(
         children: [
           TextField(
             controller: _titleController,
-            maxLength: 60,
-            keyboardType: TextInputType.text,
-            decoration: const InputDecoration(label: Text("Title")),
+            maxLength: 50,
+            decoration: const InputDecoration(
+              label: Text('Title'),
+            ),
           ),
-          TextField(
-            controller: _amountController,
-            keyboardType: TextInputType.number,
-            decoration:
-                const InputDecoration(prefixText: "\$ ", label: Text("Amount")),
+          Row(
+            children: [
+              Expanded(
+                child: TextField(
+                  controller: _amountController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    prefixText: '\$ ',
+                    label: Text('Amount'),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                width: 15,
+              ),
+              Expanded(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(_selectedDate == null
+                        ? 'no date selected'
+                        : formatter.format(_selectedDate!)),
+                    /* " ! " is used so that we can force dart to assume its value wont be null */
+
+                    IconButton(
+                      onPressed: _presentDatePicker,
+                      icon: const Icon(Icons.calendar_month),
+                    ),
+                  ],
+                ),
+              )
+            ],
           ),
           Row(
             children: [
               TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: const Text("Cancel")),
-              ElevatedButton(onPressed: () {}, child: const Text('Save Title'))
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Cancel'),
+              ),
+              ElevatedButton(
+                onPressed: () {},
+                child: const Text('Save Expense'),
+              ),
             ],
           ),
         ],
