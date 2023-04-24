@@ -1,3 +1,4 @@
+import 'package:expense_planner/main.dart';
 import 'package:expense_planner/widgets/new_expenses.dart';
 import 'package:flutter/material.dart';
 import 'package:expense_planner/model/expense.dart';
@@ -50,6 +51,16 @@ class _ExpensesState extends State<Expenses> {
 
   @override
   Widget build(context) {
+    Widget mainContent = const Center(
+      child: Text('Start adding some expense'),
+    );
+
+    if (_registeredExpense.isNotEmpty) {
+      mainContent = ExpenseList(
+        expenses: _registeredExpense,
+        onRemoveExpense: _removeExpense,
+      );
+    }
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepOrangeAccent,
@@ -64,11 +75,7 @@ class _ExpensesState extends State<Expenses> {
       body: Column(
         children: [
           const Text('expense chart'),
-          Expanded(
-              child: ExpenseList(
-            expenses: _registeredExpense,
-            onRemoveExpense: _removeExpense,
-          )),
+          Expanded(child: mainContent),
         ],
       ),
     );
