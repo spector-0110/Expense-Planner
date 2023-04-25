@@ -78,7 +78,6 @@ class _ExpensesState extends State<Expenses> {
     }
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.deepOrangeAccent,
         title: const Text("Expense Tracker"),
         actions: [
           IconButton(
