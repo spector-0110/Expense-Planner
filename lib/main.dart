@@ -48,7 +48,7 @@ void main() {
                 ),
               ),
         ),
-       // themeMode: ThemeMode.dark,
+       themeMode: ThemeMode.dark,
         home: const Expenses()),
   );
 }
