@@ -22,7 +22,7 @@ void main() {
               backgroundColor: kDarkColorScheme.primaryContainer,
               foregroundColor: kDarkColorScheme.onPrimaryContainer,
             ),
-          ),
+          ),  
         ),
         theme: ThemeData().copyWith(
           useMaterial3: true,
@@ -48,7 +48,7 @@ void main() {
                 ),
               ),
         ),
-       themeMode: ThemeMode.dark,
+       //themeMode: ThemeMode.dark,
         home: const Expenses()),
   );
 }
